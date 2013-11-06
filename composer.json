@@ -17,6 +17,6 @@
         "swiftmailer/swiftmailer": "5.1.*@dev"
     },
     "autoload": {
-        "psr-0": { "Sobit\\": "" }
+        "psr-0": { "Sobit\\SwiftMailerComponent\\": "" }
     }
 }
