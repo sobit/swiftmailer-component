@@ -21,14 +21,14 @@ Update your ```protected/config/main.php``` file:
 ```php
 <?php
 
-Yii::setPathOfAlias('vendor', dirname(__FILE__) . '/../vendor');
+Yii::setPathOfAlias('vendor', dirname(__FILE__) . '/../../vendor');
 
 return array(
     'components' => array(
         'mailer' => array(
             'class' => 'vendor.sobit.swiftmailer-component.SwiftMailerComponent',
 
-            'swiftBasePath' => dirname(__FILE__) . '/../vendor/swiftmailer/swiftmailer',
+            'swiftBasePath' => dirname(__FILE__) . '/../../vendor/swiftmailer/swiftmailer',
 
             'host'     => 'localhost', // smtp host
             'port'     => 25,          // smtp port
@@ -46,12 +46,12 @@ Usage
 Most simple usage example:
 
 ```php
-$message = Yii::app()->swiftMailer
+$message = Yii::app()->mailer
     ->createMessage('Test subject', 'Test body content')
     ->setFrom(array('john@doe.com' => 'John Doe'))
     ->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'))
 ;
-Yii::app()->swiftMailer->send($message);
+Yii::app()->mailer->send($message);
 ```
 
 [1]: https://github.com/yiisoft/yii "Yii Framework"
