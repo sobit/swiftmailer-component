@@ -29,7 +29,7 @@ return array(
             'class'    => 'vendor.sobit.swiftmailer-component.SwiftMailerComponent',
             
             'host'     => 'localhost', // smtp host
-            'port'     => '25',        // smtp port
+            'port'     => 25,          // smtp port
             'username' => null,        // username
             'password' => null,        // password
             'security' => null,        // security, e.g. "ssl"
