@@ -76,7 +76,7 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public function createMessage($subject = null, $body = null, $contentType = null, $charset = null)
     {
-        return new Swift_Message($subject, $body, $contentType, $charset);
+        return Swift_Message::newInstance($subject, $body, $contentType, $charset);
     }
 
     /**
