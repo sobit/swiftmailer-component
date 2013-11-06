@@ -1,13 +1,5 @@
 <?php
 
-namespace Sobit\SwiftMailerComponent;
-
-use CApplicationComponent;
-use Swift_Mailer;
-use Swift_Message;
-use Swift_Mime_Message;
-use Swift_SmtpTransport;
-
 /**
  * Class SwiftMailerComponent
  *
@@ -24,17 +16,21 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public $port = 25;
     /**
-     * @var null
+     * @var string
      */
     public $username = null;
     /**
-     * @var null
+     * @var string
      */
     public $password = null;
     /**
-     * @var null
+     * @var string
      */
     public $security = null;
+    /**
+     * @var string
+     */
+    public $swiftBasePath = '';
 
     /**
      * @var Swift_SmtpTransport
@@ -50,12 +46,24 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public function init()
     {
-        $this->transport = new Swift_SmtpTransport($this->host, $this->port, $this->security);
+        $this->initAutoloader($this->swiftBasePath);
+
+        $this->transport = Swift_SmtpTransport::newInstance($this->host, $this->port, $this->security);
         $this->transport->setUsername($this->username)->setPassword($this->password);
 
         $this->mailer = Swift_Mailer::newInstance($this->transport);
 
         parent::init();
+    }
+
+    /**
+     * Initialize Swift Mailer autoloader
+     */
+    private function initAutoloader($swiftBasePath)
+    {
+        require_once $swiftBasePath.'/lib/swift_required.php';
+        require_once $swiftBasePath.'/lib/classes/Swift.php';
+        Yii::registerAutoloader(array('Swift', 'autoload'));
     }
 
     /**

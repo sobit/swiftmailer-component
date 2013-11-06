@@ -25,9 +25,11 @@ Yii::setPathOfAlias('vendor', dirname(__FILE__) . '/../vendor');
 
 return array(
     'components' => array(
-        'swiftMailer' => array(
-            'class'    => 'vendor.sobit.swiftmailer-component.SwiftMailerComponent',
-            
+        'mailer' => array(
+            'class' => 'vendor.sobit.swiftmailer-component.SwiftMailerComponent',
+
+            'swiftBasePath' => dirname(__FILE__) . '/../vendor/swiftmailer/swiftmailer',
+
             'host'     => 'localhost', // smtp host
             'port'     => 25,          // smtp port
             'username' => null,        // username
