@@ -44,7 +44,11 @@ Usage
 Most simple usage example:
 
 ```php
-$message = Yii::app()->swiftMailer->createMessage('Test subject', 'Test body content');
+$message = Yii::app()->swiftMailer
+    ->createMessage('Test subject', 'Test body content')
+    ->setFrom(array('john@doe.com' => 'John Doe'))
+    ->setTo(array('receiver@domain.org', 'other@domain.org' => 'A name'))
+;
 Yii::app()->swiftMailer->send($message);
 ```
 
