@@ -51,8 +51,6 @@ class SwiftMailerComponent extends CApplicationComponent
         $this->transport = Swift_SmtpTransport::newInstance($this->host, $this->port, $this->security);
         $this->transport->setUsername($this->username)->setPassword($this->password);
 
-        $this->mailer = Swift_Mailer::newInstance($this->transport);
-
         parent::init();
     }
 
@@ -71,6 +69,10 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public function getMailer()
     {
+        if (null === $this->mailer) {
+            $this->mailer = Swift_Mailer::newInstance($this->transport);
+        }
+
         return $this->mailer;
     }
 
