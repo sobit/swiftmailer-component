@@ -99,4 +99,24 @@ class SwiftMailerComponent extends CApplicationComponent
     {
         return $this->getMailer()->send($message, $failedRecipients);
     }
+
+    /**
+     * @param string $view
+     * @param string $layout
+     * @param array  $data
+     *
+     * @return string
+     */
+    public function renderBody($view, $layout = '//layouts/main', array $data = array())
+    {
+        $previousLayout = Yii::app()->getController()->layout;
+
+        Yii::app()->getController()->layout = $layout;
+
+        $body = Yii::app()->getController()->render($view, $data, true);
+
+        Yii::app()->getController()->layout = $previousLayout;
+
+        return $body;
+    }
 } 
