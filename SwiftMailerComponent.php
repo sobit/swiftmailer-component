@@ -109,13 +109,17 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public function renderBody($view, $layout = '//layouts/main', array $data = array())
     {
-        $previousLayout = Yii::app()->getController()->layout;
+        $controller = new CController('SwiftMailerComponent');
 
-        Yii::app()->getController()->layout = $layout;
+        $viewPath = Yii::app()->getBasePath() . DIRECTORY_SEPARATOR . 'views';
 
-        $body = Yii::app()->getController()->render($view, $data, true);
+        $viewFile   = $controller->resolveViewFile($view, $viewPath, $viewPath);
+        $layoutFile = $controller->resolveViewFile($layout, $viewPath, $viewPath);
 
-        Yii::app()->getController()->layout = $previousLayout;
+        $body = $controller->renderInternal($viewFile, $data, true);
+        if (null !== $layout) {
+            $body = $controller->renderInternal($layoutFile, array('content' => $body), true);
+        }
 
         return $body;
     }
