@@ -1,5 +1,5 @@
 {
-    "name": "sobit/swiftmailer-component",
+    "name": "knyga/swiftmailer-component",
     "description": "Component for Yii Framework based application which provides simple configuration interface for Swift Mailer library.",
     "homepage": "https://github.com/sobit/swiftmailer-component",
     "keywords": ["sobit", "yii", "swiftmailer", "component"],
