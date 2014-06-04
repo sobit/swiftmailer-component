@@ -31,6 +31,14 @@ class SwiftMailerComponent extends CApplicationComponent
      * @var string
      */
     public $swiftBasePath = '';
+    /**
+     * @var string
+     */
+    public $fromEmail = null;
+    /**
+     * @var string
+     */
+     public $fromName = null;
 
     /**
      * @var Swift_SmtpTransport
@@ -86,7 +94,19 @@ class SwiftMailerComponent extends CApplicationComponent
      */
     public function createMessage($subject = null, $body = null, $contentType = null, $charset = null)
     {
-        return Swift_Message::newInstance($subject, $body, $contentType, $charset);
+        $message = Swift_Message::newInstance($subject, $body, $contentType, $charset);
+
+        if(null !== $this->fromEmail) {
+            
+            if(null === $this->fromName) {
+                $message->setFrom($this->fromEmail);
+            } else {
+                $message->setFrom($this->fromEmail, $this->fromName);
+            }
+            
+        }
+
+        return $message;
     }
 
     /**
