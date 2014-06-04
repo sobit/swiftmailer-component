@@ -34,7 +34,11 @@ class SwiftMailerComponent extends CApplicationComponent
     /**
      * @var string
      */
-    public $from = null;
+    public $fromEmail = null;
+    /**
+     * @var string
+     */
+     public $fromName = null;
 
     /**
      * @var Swift_SmtpTransport
@@ -92,8 +96,14 @@ class SwiftMailerComponent extends CApplicationComponent
     {
         $message = Swift_Message::newInstance($subject, $body, $contentType, $charset);
 
-        if(isset($this->from)) {
-            call_user_func_array(array($message, "setFrom"), $this->from);
+        if(null !== $this->fromEmail) {
+            
+            if(null === $this->fromName) {
+                $message->setFrom($this->fromEmail);
+            } else {
+                $message->setFrom($this->fromEmail, $this->fromName);
+            }
+            
         }
 
         return $message;
